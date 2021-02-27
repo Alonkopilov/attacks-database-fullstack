@@ -58,8 +58,7 @@ function buildAttacksDatabase(attacksDir) {
   if (fs.existsSync(attacksDir) == false) {
     throw "Directory not found, exiting..";
   }
-  //C:\Alonkopilov_Code_Projects\attacks-database-fullstack + "\attack-pattern"
-  console.log("DIR=" + __dirname);
+
   var allAttackFiles = fs.readdirSync(attacksDir);
   var attacksDatabase = [];
 
