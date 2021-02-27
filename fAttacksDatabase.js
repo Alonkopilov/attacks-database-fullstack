@@ -52,16 +52,19 @@ function getAttackDetails(attackJson) {
     output: array of dictionaries, each dictionary represents an attack
 */
 function buildAttacksDatabase(attacksDir) {
+  attacksDir = __dirname + attacksDir;
+
   //check if directory exists
   if (fs.existsSync(attacksDir) == false) {
     throw "Directory not found, exiting..";
   }
-
+  //C:\Alonkopilov_Code_Projects\attacks-database-fullstack + "\attack-pattern"
+  console.log("DIR=" + __dirname);
   var allAttackFiles = fs.readdirSync(attacksDir);
   var attacksDatabase = [];
 
   for (var i = 0; i < allAttackFiles.length; i++) {
-    var fileDir = attacksDir + "/" + allAttackFiles[i];
+    var fileDir = attacksDir + "\\" + allAttackFiles[i];
     var contentJson = readFileToDict(fileDir);
     var attackDetails = getAttackDetails(contentJson);
 
