@@ -1,23 +1,21 @@
 import React, { Component } from "react";
 import "bootstrap/dist/css/bootstrap.css";
-import ListGroup from "react-bootstrap/ListGroup";
+import Accordion from "react-bootstrap/Accordion";
+import Card from "react-bootstrap/Card";
 
 class Database extends Component {
   state = {
     fullDatabase: [],
     attacks: [],
     searchTerm: "",
+    eventCounter: 0,
   };
-
-  constructor(props) {
-    super(props);
-  }
 
   render() {
     return (
-      <React.Fragment>
-        <view style={{ textAlign: "center" }}>
-          <h1 className="m-4">Attack Patterns Database</h1>
+      <div style={{ marginTop: "20px" }}>
+        <view style={{ textAlign: "center", color: "#ffffff" }}>
+          <h1>Attack Patterns Database</h1>
           <p>
             Get updated on upcoming Office cyber attacks, get their details, and
             more.
@@ -33,11 +31,11 @@ class Database extends Component {
             placeholder="Search an attack by description"
           ></input>
 
-          <ListGroup className="m-4" action variant="info">
-            <span>{this.arrToGroupList()}</span>
-          </ListGroup>
+          <Accordion defaultActiveKey="0">
+            <div style={{ marginTop: "10px" }}>{this.arrToGroupList()}</div>
+          </Accordion>
         </div>
-      </React.Fragment>
+      </div>
     );
   }
 
@@ -46,8 +44,10 @@ class Database extends Component {
   };
 
   dynamicSearch() {
-    return this.getAttackNames().filter((attack) =>
-      attack.toLowerCase().includes(this.state.searchTerm.toLowerCase())
+    return this.state.fullDatabase.filter((attack) =>
+      attack.description
+        .toLowerCase()
+        .includes(this.state.searchTerm.toLowerCase())
     );
   }
 
@@ -64,36 +64,44 @@ class Database extends Component {
 
   componentDidMount() {
     this.sendDatabaseRequest();
+    document.body.style.backgroundColor = "#191A1F";
   }
 
   arrToGroupList() {
-    return this.dynamicSearch().map((name) => (
-      <ListGroup.Item action variant="info">
-        <span>{name}</span>
-      </ListGroup.Item>
+    return this.dynamicSearch().map((attack) => (
+      <Card
+        style={{
+          width: "1300px",
+          marginLeft: "auto",
+          marginRight: "auto",
+          marginTop: "3px",
+          backgroundColor: "#121318",
+          color: "#ffffff",
+        }}
+      >
+        <Accordion.Toggle as={Card.Header} eventKey={attack.id}>
+          {attack.name}
+        </Accordion.Toggle>
+        <Accordion.Collapse eventKey={attack.id}>
+          <Card.Body>
+            <ul style={{ textAlign: "left" }}>
+              <li>{"DESCRIPTION: " + attack.description} </li>
+              <li>{"ID: " + attack.id} </li>
+              <li>{"PLATFORMS: " + attack.x_mitre_platforms} </li>
+              <li>{"DETECTION: " + attack.x_mitre_detection} </li>
+            </ul>
+          </Card.Body>
+        </Accordion.Collapse>
+      </Card>
     ));
-  }
-
-  getAttackNames() {
-    var arr = [];
-
-    this.state.fullDatabase.forEach((item, index) => {
-      arr.push(item.name);
-    });
-
-    return arr;
   }
 
   databaseToArr() {
     var arr = [];
 
-    console.log(this.state.fullDatabase);
-
     for (var i = 0; i < this.state.fullDatabase.length; i++) {
       arr.push(this.state.fullDatabase[i].name);
     }
-
-    console.log(arr);
 
     return arr;
   }
