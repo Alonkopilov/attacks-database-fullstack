@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import "bootstrap/dist/css/bootstrap.css";
 import Accordion from "react-bootstrap/Accordion";
 import Card from "react-bootstrap/Card";
+import CustomChatbot from "./Chatbot/CustomChatbot";
 
 class Database extends Component {
   state = {
@@ -14,6 +15,8 @@ class Database extends Component {
   render() {
     return (
       <div style={{ marginTop: "20px" }}>
+        <CustomChatbot />
+
         <view style={{ textAlign: "center", color: "#ffffff" }}>
           <h1>Attack Patterns Database</h1>
           <p>
