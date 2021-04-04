@@ -1,8 +1,8 @@
 //Imports
-const fData = require("./fAttacksDatabase");
-const EventsEmitter = require("events");
+import { buildAttacksDatabase } from "./fAttacksDatabase";
+import EventsEmitter from "events";
 
-myDatabase = fData.buildAttacksDatabase("./attack-pattern");
+myDatabase = buildAttacksDatabase("./attack-pattern");
 
 console.log("\n\n\nAmount of attacks = " + myDatabase.length);
 

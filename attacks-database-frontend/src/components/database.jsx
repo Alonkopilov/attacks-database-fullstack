@@ -15,8 +15,6 @@ class Database extends Component {
   render() {
     return (
       <div style={{ marginTop: "20px" }}>
-        <CustomChatbot />
-
         <view style={{ textAlign: "center", color: "#ffffff" }}>
           <h1>Attack Patterns Database</h1>
           <p>
@@ -27,7 +25,7 @@ class Database extends Component {
 
         <div style={{ textAlign: "center" }}>
           <input
-            style={{ width: 1300 }}
+            style={{ width: "96%" }}
             type="text"
             value={this.state.searchTerm}
             onChange={this.editSearchTerm}
@@ -38,6 +36,8 @@ class Database extends Component {
             <div style={{ marginTop: "10px" }}>{this.arrToGroupList()}</div>
           </Accordion>
         </div>
+
+        <CustomChatbot props={this.state.fullDatabase} />
       </div>
     );
   }
@@ -74,7 +74,7 @@ class Database extends Component {
     return this.dynamicSearch().map((attack) => (
       <Card
         style={{
-          width: "1300px",
+          width: "96%",
           marginLeft: "auto",
           marginRight: "auto",
           marginTop: "3px",
