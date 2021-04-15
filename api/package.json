@@ -3,9 +3,7 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "concurrently \"npm run server\"",
-    "server": "node ./bin/www",
-    "client": "cd ../attacks-database-frontend && npm start"
+    "start": "node ./bin/www"
   },
   "dependencies": {
     "concurrently": "^6.0.0",

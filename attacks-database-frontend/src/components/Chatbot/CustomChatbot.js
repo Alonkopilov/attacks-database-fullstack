@@ -46,7 +46,30 @@ function CustomChatbot(props) {
           label: "Scan URL in VirusTotal",
           trigger: "virustotal-url-request",
         },
+        {
+          value: "hash",
+          label: "Scan Hash in VirusTotal",
+          trigger: "virustotal-hash-request",
+        },
       ],
+    },
+    //VirusTotal HASH
+    {
+      id: "virustotal-hash-request",
+      message: "Enter a Hash: ",
+      trigger: "virustotal-hash-input",
+    },
+    {
+      id: "virustotal-hash-input",
+      user: true,
+      trigger: "get-hash-result",
+    },
+    {
+      id: "get-hash-result",
+      message: (dict) => {
+        return apiAccess.sendHashReq(dict["previousValue"]);
+      },
+      trigger: "opening",
     },
 
     //VirusTotal URL
@@ -63,7 +86,7 @@ function CustomChatbot(props) {
     {
       id: "get-url-result",
       message: (dict) => {
-        return apiAccess.sendReq(dict["previousValue"]);
+        return apiAccess.sendUrlReq(dict["previousValue"]);
       },
       trigger: "opening",
     },

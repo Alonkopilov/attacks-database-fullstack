@@ -32,9 +32,7 @@ class Database extends Component {
             placeholder="Search an attack by description"
           ></input>
 
-          <Accordion defaultActiveKey="0">
-            <div style={{ marginTop: "10px" }}>{this.arrToGroupList()}</div>
-          </Accordion>
+          <Accordion defaultActiveKey="0">{this.arrToGroupList()}</Accordion>
         </div>
 
         <CustomChatbot props={this.state.fullDatabase} />
@@ -62,7 +60,6 @@ class Database extends Component {
       });
 
     this.setState({ fullDatabase: data });
-    this.databaseToArr();
   }
 
   componentDidMount() {
@@ -97,16 +94,6 @@ class Database extends Component {
         </Accordion.Collapse>
       </Card>
     ));
-  }
-
-  databaseToArr() {
-    var arr = [];
-
-    for (var i = 0; i < this.state.fullDatabase.length; i++) {
-      arr.push(this.state.fullDatabase[i].name);
-    }
-
-    return arr;
   }
 }
 
